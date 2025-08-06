@@ -82,9 +82,9 @@ Created IAM role: `GlueCrawlerAthenaRole` with the following:
 }
 ```
 
-[View role JSON here](iam/glue-crawler-athena-role.json)
+[View role JSON here](iam/roles/glue-crawler-athena-role.json)
 
-[View policy JSON here](iam/glue-crawler-inline-policy.json)
+[View policy JSON here](iam/policies/glue-crawler-inline-policy.json)
 
 ---
 
