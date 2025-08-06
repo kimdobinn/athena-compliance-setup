@@ -46,7 +46,7 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 ## Work Planning
 
 ### 1. S3 Bucket Setup
-- Create S3 bucket for specific env: s3://appbackend-demo 
+- Create S3 bucket for specific env: s3://appbackend-demo
 - Used for: 
   - Athena query results 
   - Optional Glue job outputs 
@@ -55,17 +55,16 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 - Create IAM Role with: 
   - Trust policy: allow Glue service to assume role 
   - Inline policy: allow access to: 
-- dynamodb:Scan, DescribeTable, ListTables 
-- s3:* on appbackend-demo 
-- glue:* permissions for catalog updates 
+    - dynamodb:Scan, DescribeTable, ListTables 
+    - s3:* on appbackend-demo 
+    - glue:* permissions for catalog updates 
 
 ## 3. Glue Crawler Configuration 
 - Name: dynamodb-to-athena-crawler 
-- Data source: DynamoDB table (e.g. respiree-data-processing-ygdn0ixv0d) 
-- IAM role: the one created above 
-- Output: Glue database (e.g. default) 
-- Optional: 
-  - S3 output: s3://appbackend-demo 
+- Data Source: DynamoDB table (e.g. respiree-data-processing-ygdn0ixxxx) 
+- IAM Role: the one created above 
+- Output Database: Glue database (e.g. default) 
+- Optional Output: s3://appbackend-demo 
 
 ## 4. Athena Setup
 - "azprod-dataprocessing-dynamodb"

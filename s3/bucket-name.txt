@@ -1,0 +1,5 @@
+s3://appbackend-demo
+
+Purpose:
+- Store Athena query results
+- Store optional Glue job outputs

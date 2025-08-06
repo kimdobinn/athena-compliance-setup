@@ -1,1 +1,16 @@
-GlueCrawlerInlinePolicy
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:Scan",
+        "dynamodb:DescribeTable",
+        "dynamodb:ListTables",
+        "s3:*",
+        "glue:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}
