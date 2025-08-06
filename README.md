@@ -12,6 +12,37 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 3. **S3 Bucket** to store Athena query results and optional Glue job outputs  
 4. **Athena** to query the structured metadata from Glue
 
+```plaintext
+                  +--------------------+
+                  |   DynamoDB Table   |
+                  | respiree-data-...  |
+                  +--------------------+
+                            |
+                            v
+                +------------------------+
+                |    Glue Crawler        |
+                | dynamodb-to-athena-...|
+                +------------------------+
+                            |
+                            v
+              +----------------------------+
+              | Glue Data Catalog / DB     |
+              |  defaultgluedatabase       |
+              +----------------------------+
+                            |
+                            v
+                +------------------------+
+                |      AWS Athena        |
+                |   (Query Interface)    |
+                +------------------------+
+                            |
+                            v
+                +------------------------+
+                |     S3 Bucket          |
+                |  appbackend-demo       |
+                +------------------------+
+
+
 ## Work Planning
 
 ### 1. S3 Bucket Setup
@@ -48,6 +79,7 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 
 ```bash
 aws s3api create-bucket --bucket appbackend-demo --region ap-southeast-1
+'''
 
 Used to store:
 
@@ -55,7 +87,8 @@ Athena query results
 
 Optional Glue job outputs
 
-✅ Created IAM Role for Glue Crawler
+### Created IAM Role for Glue Crawler
+
 File: iam/glue-crawler-role.json
 
 Key permissions:
@@ -71,7 +104,7 @@ Key permissions:
   "Resource": "*"
 }
 
-✅ Configured AWS Glue Crawler
+### Configured AWS Glue Crawler
 Name: dynamodb-to-athena-crawler
 
 Data Source: DynamoDB table
@@ -82,12 +115,12 @@ Output Database: defaultgluedatabase
 
 See details: 
 
-✅ Athena Setup
+### Athena Setup
 Successfully queried the DynamoDB data via Athena:
 
 SELECT * FROM "default"."respiree_data_processing_jnq9suqi99" LIMIT 10;
 
-📁 Logs
+### Logs
 Glue crawler run log:
 
 Crawler: dynamodb-to-athena-crawler
@@ -97,7 +130,7 @@ Start Time: 2025-07-10T09:32:00Z
 End Time: 2025-07-10T09:35:21Z
 
 
-Outcome
+### Outcome
 This task ensured that:
 
 Athena can be used as a reliable query engine for compliance reviews.
@@ -105,15 +138,3 @@ Athena can be used as a reliable query engine for compliance reviews.
 Metadata from DynamoDB is discoverable and queryable via Glue.
 
 Infrastructure setup follows AWS best practices for permission control and modularity.
-
-🏷️ Tags
-#AWS #Athena #GlueCrawler #DynamoDB #S3 #Internship #Compliance
-
----
-
-### 🧩 Additional Notes
-- You can include fake/sanitized logs if you're not allowed to expose real names or data.
-- Keep your `README.md` as the main narrative. Other files should support it, not overwhelm it.
-- If you like, I can help you generate those example logs and JSON files as well.
-
-Want me to generate all the example files (`glue-crawler-role.json`, `crawler-config.md`, `crawler-run-log.txt`, etc.) next?
