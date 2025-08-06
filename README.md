@@ -1,12 +1,12 @@
-# 🧠 AWS Athena Compliance Setup
+# AWS Athena Compliance Setup
 
-## 📌 Objective
+## Objective
 
 To configure an automated pipeline that extracts data from a DynamoDB table and enables querying via AWS Athena for compliance and data audit purposes.
 
 ---
 
-## 🗺️ Architecture Overview
+## Architecture Overview
 
 1. **DynamoDB** as the data source  
 2. **AWS Glue Crawler** to scan DynamoDB and populate the Glue Data Catalog  
@@ -46,9 +46,9 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 
 ---
 
-## 🛠️ Work Planning
+## Work Planning
 
-### 1. ✅ S3 Bucket Setup
+### 1. S3 Bucket Setup
 
 - Created S3 bucket for staging environment: `s3://appbackend-demo`
 - Purpose:
@@ -61,7 +61,7 @@ aws s3api create-bucket --bucket appbackend-demo --region ap-southeast-1
 
 ---
 
-### 2. ✅ IAM Role for Glue Crawler
+### 2. IAM Role for Glue Crawler
 
 Created IAM role: `GlueCrawlerAthenaRole` with the following:
 
@@ -82,11 +82,11 @@ Created IAM role: `GlueCrawlerAthenaRole` with the following:
 }
 ```
 
-➡️ [View full JSON here](iam/glue-crawler-role.json)
+[View full JSON here](iam/glue-crawler-role.json)
 
 ---
 
-### 3. ✅ Glue Crawler Configuration
+### 3. Glue Crawler Configuration
 
 - **Name**: `dynamodb-to-athena-crawler`  
 - **Data Source**: DynamoDB table `respiree-data-processing-ygdn0ixv0d`  
@@ -94,11 +94,11 @@ Created IAM role: `GlueCrawlerAthenaRole` with the following:
 - **Output Database**: `defaultgluedatabase`  
 - **Optional Output**: `s3://appbackend-demo`
 
-➡️ [View crawler config](glue/crawler-config.md)
+[View crawler config](glue/crawler-config.md)
 
 ---
 
-### 4. ✅ Athena Setup
+### 4. Athena Setup
 
 Successfully connected Athena to the Glue Catalog and ran a sample query:
 
@@ -110,12 +110,12 @@ SELECT * FROM "default"."respiree_data_processing_jnq9suqi99" LIMIT 10;
 - Glue database: `default`
 - Table: `respiree-data-processing-ygdn0ixv0d`
 
-➡️ [View schema](glue/glue-database.md)  
-➡️ [View query](sql/sample-query.sql)
+[View schema](glue/glue-database.md)  
+[View query](sql/sample-query.sql)
 
 ---
 
-## 📄 Logs
+## Logs
 
 Glue crawler execution log:
 
@@ -127,11 +127,11 @@ Start Time: 2025-07-10T09:32:00Z
 End Time: 2025-07-10T09:35:21Z
 ```
 
-➡️ [View full log](logs/crawler-run-log.txt)
+[View full log](logs/crawler-run-log.txt)
 
 ---
 
-## ✅ Outcome
+## Outcome
 
 This setup ensured that:
 
@@ -141,7 +141,7 @@ This setup ensured that:
 
 ---
 
-## 🏷️ Tools Used
+## Tools Used
 
 - AWS Glue
 - AWS Athena
