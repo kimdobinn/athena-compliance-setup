@@ -12,7 +12,39 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
 3. **S3 Bucket** to store Athena query results and optional Glue job outputs  
 4. **Athena** to query the structured metadata from Glue
 
-### 1) Created S3 Bucket
+## Work Planning
+
+### 1. S3 Bucket Setup
+- Create S3 bucket for specific env: s3://appbackend-demo 
+- Used for: 
+  - Athena query results 
+  - Optional Glue job outputs 
+
+### 2. IAM Role for Glue Crawler
+- Create IAM Role with: 
+  - Trust policy: allow Glue service to assume role 
+  - Inline policy: allow access to: 
+- dynamodb:Scan, DescribeTable, ListTables 
+- s3:* on appbackend-demo 
+- glue:* permissions for catalog updates 
+
+## 3. Glue Crawler Configuration 
+- Name: dynamodb-to-athena-crawler 
+- Data source: DynamoDB table (e.g. respiree-data-processing-ygdn0ixv0d) 
+- IAM role: the one created above 
+- Output: Glue database (e.g. default) 
+- Optional: 
+  - S3 output: s3://appbackend-demo 
+
+## 4. Athena Setup
+- "azprod-dataprocessing-dynamodb"
+- "default"
+- "respiree-data-processing-ygdn0ixv0d" 
+- azprod-dataprocessing-dynamodb (data source) 
+- default (database) 
+- respiree-data-processing-ygdn0ixv0d (table) 
+
+## What I did:
 
 ```bash
 aws s3api create-bucket --bucket appbackend-demo --region ap-southeast-1
@@ -65,7 +97,7 @@ Start Time: 2025-07-10T09:32:00Z
 End Time: 2025-07-10T09:35:21Z
 
 
-🎯 Outcome
+Outcome
 This task ensured that:
 
 Athena can be used as a reliable query engine for compliance reviews.
