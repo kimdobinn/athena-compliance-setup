@@ -41,7 +41,7 @@ To configure an automated pipeline that extracts data from a DynamoDB table and 
                 |     S3 Bucket          |
                 |  appbackend-demo       |
                 +------------------------+
-
+```
 
 ## Work Planning
 
