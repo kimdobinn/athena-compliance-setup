@@ -1,0 +1,27 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Effect": "Allow",
+			"Action": [
+				"dynamodb:Scan",
+				"dynamodb:DescribeTable",
+				"dynamodb:ListTables"
+			],
+			"Resource": "*"
+		},
+		{
+			"Effect": "Allow",
+			"Action": "s3:*",
+			"Resource": [
+				"arn:aws:s3:::appbackend-islhd",
+				"arn:aws:s3:::appbackend-islhd/*"
+			]
+		},
+		{
+			"Effect": "Allow",
+			"Action": "glue:*",
+			"Resource": "*"
+		}
+	]
+}
